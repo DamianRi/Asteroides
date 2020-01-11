@@ -1,0 +1,21 @@
+html, body{
+    font-family: 'Stalinist One', cursive;
+    cursor: crosshair;
+    background-color: #c0c0c0;
+    margin: 0;
+    padding: 0;
+}
+
+#info{
+    color: #fff;
+    position: absolute;
+    float: left;
+    padding: 1em;
+    font-size: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+    #info {
+      font-size: 0.7em;
+    }
+}

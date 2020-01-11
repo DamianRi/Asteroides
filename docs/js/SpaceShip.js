@@ -4,9 +4,10 @@ var h = heightScreen;
 function SpaceShip() {
     this.posx = w/2;
     this.posy = h/4*3;
-    this.ship = loadImage("rocket1.png");
+    this.ship = loadImage("img/rocket1.png");
     this.radius = 35;
     this.life = 10;
+    this.score = 0;
 
     this.display = function () {
         fill(255,5);
@@ -23,7 +24,7 @@ function SpaceShip() {
     }
 
     this.isAlive = function () {
-        if (this.life < 0) {
+        if (this.life <= 0) {
             return false;
         }
         return true;

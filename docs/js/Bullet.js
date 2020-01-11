@@ -1,7 +1,7 @@
 //shoot.src = "shoot.wav";
 
 function Bullet(ss) {
-    var shoot = new Audio("shoot.wav");
+    var shoot = new Audio("sound/shoot.wav");
     this.posx = ss.posx;
     this.posy = ss.posy;
     this.speed = 10;

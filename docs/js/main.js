@@ -1,6 +1,6 @@
 
-var widthScreen = 300;
-var heightScreen = 500;
+var widthScreen = window.innerWidth;
+var heightScreen = window.innerHeight-200;
 
 let ship;
 let img;
@@ -11,56 +11,55 @@ let totalAs = 10;
 var bullets = new Array();
 var planet;
 let gameover;
-
+var score; 
 
 function setup() {
     cursor(CROSS);
-    ship = new SpaceShip();
-    planet = new Planet();
-    gameover = loadImage("lose.png");
-    var pause = true;
 
+    ship = new SpaceShip();
+    document.getElementById("life").innerText = "LIFE: "+ship.life;  
+    document.getElementById("score").innerText = "SCORE: "+ship.score;
+
+    planet = new Planet();
+    gameover = loadImage("img/lose.png");
+    var pause = true;
+    
     createCanvas(widthScreen, heightScreen);
     asteroides = new Array();
     for (let index = 0; index < totalAs; index++) {
         asteroide = new Asteroide();
         asteroides.push(asteroide);
     }
-    /*
-    */
-    //asteroide = new Asteroide();
 }
 
 function draw() {
-    //console.log("Bullets: "+bullets.length);
-
     background(50,10);
     planet.display();
-
+    
     if (ship.isAlive()) {
         console.log("LIFE: "+ship.life);
+        console.log("SCORES: "+ship.score);
         
-
-    ship.display();
-    ship.move();
-
-
-    for (let index = 0; index < bullets.length; index++) {
-        bullets[index].display();
-        bullets[index].move();
-        // if bullet is screen out
-        if (bullets[index].dead) {
-            bullets.splice(index, 1);
-            break;
-        }
-
-        for (let a = 0; a < asteroides.length; a++) {
-            if (bullets[index].hitsAs(asteroides[a])){
+        ship.display();
+        ship.move();
+        
+        
+        for (let index = 0; index < bullets.length; index++) {
+            bullets[index].display();
+            bullets[index].move();
+            // if bullet is screen out
+            if (bullets[index].dead) {
                 bullets.splice(index, 1);
                 break;
             }
+            
+            for (let a = 0; a < asteroides.length; a++) {
+                if (bullets[index].hitsAs(asteroides[a])){
+                    bullets.splice(index, 1);
+                    break;
+                }
+            }
         }
-    }
     //end isAlive if
     }else{
         imageMode(CENTER);
@@ -85,6 +84,8 @@ function draw() {
 
 
 function mouseClicked() {
-    bullet = new Bullet(ship);
-    bullets.push(bullet);
+    if (ship.isAlive()) {
+        bullet = new Bullet(ship);
+        bullets.push(bullet);        
+    }
 }
